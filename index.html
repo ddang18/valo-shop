@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VALO.SHOP — демо-магазин Valorant</title>
+  <meta name="description" content="Демо-магазин: аккаунты, бустинг, коучинг Valorant. Локальная витрина без оплаты, корзина и оформление заказа через почту/Telegram.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/logo.svg" as="image" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#content">К основному контенту</a>
+  <header class="site-header" data-sticky>
+    <div class="wrap nav">
+      <a class="brand" href="#hero" aria-label="На главную">
+        <img src="assets/logo.svg" alt="" width="28" height="28" aria-hidden="true">
+        <strong>VALO.SHOP</strong>
+        <span class="badge">DEMO</span>
+      </a>
+      <nav aria-label="Главное меню">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-items">Меню</button>
+        <ul id="nav-items" class="nav-items">
+          <li><a href="#accounts">Аккаунты</a></li>
+          <li><a href="#boost">Буст</a></li>
+          <li><a href="#coaching">Коучинг</a></li>
+          <li><a href="#bundles">Наборы</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Контакты</a></li>
+        </ul>
+      </nav>
+      <div class="actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Переключить тему" title="Тема">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm8-5a1 1 0 0 1 1 1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1 1 1 0 0 1 1-1zM3 12a1 1 0 0 1 1-1H2a1 1 0 1 1 0-2h2a1 1 0 0 1 0 2H4a1 1 0 0 1-1 1zm15.657 6.243a1 1 0 0 1 1.414 0l1.415 1.414a1 1 0 1 1-1.415 1.415l-1.414-1.415a1 1 0 0 1 0-1.414zM4.93 4.93a1 1 0 0 1 1.414 0L7.76 6.343A1 1 0 1 1 6.344 7.76L4.93 6.344a1 1 0 0 1 0-1.414zM4.93 19.07a1 1 0 0 1 0 1.414L3.515 21.9a1 1 0 0 1-1.415-1.415l1.415-1.414a1 1 0 0 1 1.414 0z"/></svg>
+        </button>
+        <button id="cartBtn" class="btn cart-btn" aria-expanded="false" aria-controls="cartDrawer">
+          Корзина <span id="cartCount" class="pill">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section id="hero" class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <h1>Маркет Valorant (демо)</h1>
+          <p>Лёгкая витрина без оплаты: витрина товаров, корзина, оформление заказа через почту или Telegram. Контент демо‑характера — соблюдайте правила Riot.</p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#accounts">Смотреть аккаунты</a>
+            <a class="btn" href="#boost">Калькулятор буста</a>
+          </div>
+          <p class="notice">⚠️ Дисклеймер: продажа аккаунтов и бустинг могут нарушать <a href="#faq">Правила Riot</a>. Используйте проект как демонстрационный шаблон.</p>
+        </div>
+        <div class="hero-art">
+          <img src="assets/hero.svg" alt="Стилевое изображение персонажей и карточек товаров">
+        </div>
+      </div>
+    </section>
+
+    <section id="search" class="section">
+      <div class="wrap">
+        <div class="toolbar">
+          <input id="searchInput" class="input" type="search" placeholder="Поиск по товарам…" aria-label="Поиск">
+          <select id="sortSelect" class="select" aria-label="Сортировка">
+            <option value="pop">По популярности</option>
+            <option value="price-asc">По цене ↑</option>
+            <option value="price-desc">По цене ↓</option>
+            <option value="name">По названию</option>
+          </select>
+          <div class="chips" role="group" aria-label="Фильтр по категориям">
+            <button class="chip is-active" data-filter="all">Все</button>
+            <button class="chip" data-filter="Аккаунты">Аккаунты</button>
+            <button class="chip" data-filter="Буст">Буст</button>
+            <button class="chip" data-filter="Коучинг">Коучинг</button>
+            <button class="chip" data-filter="Наборы">Наборы</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog" class="section">
+      <div class="wrap">
+        <div id="productGrid" class="grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="boost" class="section alt">
+      <div class="wrap">
+        <h2>Калькулятор буста (демо)</h2>
+        <form id="boostForm" class="boost-form" aria-describedby="boostNote">
+          <div class="field">
+            <label for="rankFrom">Текущий ранг</label>
+            <select id="rankFrom" class="select"></select>
+          </div>
+          <div class="field">
+            <label for="rankTo">Желаемый ранг</label>
+            <select id="rankTo" class="select"></select>
+          </div>
+          <div class="field">
+            <label for="servers">Регион</label>
+            <select id="servers" class="select">
+              <option>EU</option>
+              <option>TR</option>
+              <option>NA</option>
+              <option>AP</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="duo">Режим</label>
+            <select id="duo" class="select">
+              <option value="solo">Соло</option>
+              <option value="duo">Дуо +25%</option>
+            </select>
+          </div>
+          <div class="calc-out">
+            <output id="boostPrice">0 ₽</output>
+            <button type="submit" class="btn primary">Добавить в корзину</button>
+          </div>
+          <p id="boostNote" class="subtle">Цены ориентировочные, заказ оформляется вручную. Условия — в FAQ.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="wrap">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Это реальный магазин?</summary>
+          <p>Нет. Это демонстрационный шаблон фронтенда: витрина, корзина, оформление заказа без оплаты. Можно развернуть на GitHub Pages/Netlify/Vercel.</p>
+        </details>
+        <details>
+          <summary>Что насчёт правил Riot?</summary>
+          <p>Продажа аккаунтов и бустинг могут противоречить правилам использования Riot Games. Перед использованием убедитесь, что ваша деятельность соответствует правилам и законам вашей страны.</p>
+        </details>
+        <details>
+          <summary>Как оформить заказ?</summary>
+          <p>Добавьте товары в корзину и нажмите «Оформить заказ». Система сформирует письмо/сообщение с деталями, которое можно отправить вручную.</p>
+        </details>
+        <details>
+          <summary>Как развернуть сайт?</summary>
+          <p>Распакуйте архив и откройте <code>index.html</code>. Или залейте папку на любой статический хостинг (GitHub Pages, Netlify, Vercel).</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact" class="section alt">
+      <div class="wrap contact">
+        <h2>Контакты</h2>
+        <form id="contactForm" class="contact-form">
+          <div class="field">
+            <label for="cname">Имя</label>
+            <input id="cname" class="input" required>
+          </div>
+          <div class="field">
+            <label for="ccontact">Telegram или email</label>
+            <input id="ccontact" class="input" placeholder="@nickname или you@example.com" required>
+          </div>
+          <div class="field">
+            <label for="cmsg">Сообщение</label>
+            <textarea id="cmsg" class="input" rows="4" placeholder="Ваш вопрос"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn" type="reset">Сброс</button>
+            <button class="btn primary" type="submit">Отправить</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <aside id="cartDrawer" class="cart" aria-labelledby="cartBtn" hidden>
+    <div class="cart-head">
+      <h3>Корзина</h3>
+      <button class="icon-btn" id="cartClose" aria-label="Закрыть корзину">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div id="cartItems" class="cart-items" aria-live="polite"></div>
+    <div class="cart-foot">
+      <div class="total">
+        <span>Итого:</span>
+        <strong id="cartTotal">0 ₽</strong>
+      </div>
+      <div class="cart-actions">
+        <button id="clearCart" class="btn danger">Очистить</button>
+        <button id="checkoutBtn" class="btn primary">Оформить заказ</button>
+      </div>
+      <p class="subtle small">Оплата не подключена. Заказ оформляется вручную.</p>
+    </div>
+  </aside>
+
+  <dialog id="checkoutModal" class="modal">
+    <form method="dialog" class="modal-card" id="checkoutForm">
+      <header class="modal-head">
+        <h3>Оформление заказа</h3>
+        <button class="icon-btn" value="cancel" aria-label="Закрыть">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+      <section class="modal-body">
+        <div class="field">
+          <label for="custName">Имя</label>
+          <input id="custName" class="input" required>
+        </div>
+        <div class="field">
+          <label for="custContact">Telegram или email</label>
+          <input id="custContact" class="input" placeholder="@nickname или you@example.com" required>
+        </div>
+        <div class="field">
+          <label for="orderNote">Комментарий к заказу</label>
+          <textarea id="orderNote" class="input" rows="3" placeholder="Например: играть по вечерам, EU сервер"></textarea>
+        </div>
+        <div class="field">
+          <label>Предпросмотр</label>
+          <textarea id="orderPreview" class="input mono" rows="8" readonly></textarea>
+        </div>
+      </section>
+      <footer class="modal-foot">
+        <button class="btn" value="cancel">Отмена</button>
+        <a id="mailtoBtn" class="btn" href="#" target="_blank" rel="noopener">Через почту</a>
+        <button class="btn" id="copyBtn" value="default">Скопировать</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="wrap foot">
+      <p>© <span id="year"></span> VALO.SHOP — демонстрационный шаблон. Riot Games, Valorant и связанные логотипы — товарные знаки их владельцев.</p>
+      <a class="small subtle" href="#faq">Правила и дисклеймер</a>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
